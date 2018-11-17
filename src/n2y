@@ -269,6 +269,9 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
 
         n2y_def_pre_build=false
         n2y_def_post_build=false
+        unset n2ybuild_prefix
+        unset n2ypre_build
+        unset n2ypost_build
         while IFS= read -r line; do
             trimmedline=${line//\ /''}
             if [[ ${trimmedline} = "build_prefix="* ]]; then
