@@ -5,10 +5,10 @@ pkgver=1
 pkgrel=1
 pkgdesc="Help Arch CN maintainers switch from nvchecker to lilac.yaml"
 arch=('any')
-url="https://github.com/TobiichiAmane/nvchecker2yaml"
+url="https://github.com/tobiichiamane/nvchecker2yaml"
 license=('GPLv3')
 makedepends=('git')
-source=('git://github.com/TobiichiAmane/nvchecker2yaml.git')
+source=('git://github.com/tobiichiamane/nvchecker2yaml.git')
 md5sums=('SKIP')
 depends=('git' 'bat')
 
