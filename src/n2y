@@ -66,8 +66,6 @@ processnvchecker() {
         fi
         if [[ ${commentflag} -eq 0 ]]; then
             echo "${line}" >> "${n2yuid}/nvchecker.new.ini"
-        else
-            echo ";${line}" >> "${n2yuid}/nvchecker.new.ini"
         fi
     done < "${n2yrepodir}/nvchecker.ini"
 
@@ -76,7 +74,6 @@ processnvchecker() {
     cp "${n2yuid}/nvchecker.new.ini" nvchecker.ini
     rm -f "${n2yuid}/nvchecker.new.ini"
     git add nvchecker.ini
-    git commit -m "Update nvchecker.ini: removing ${n2ycompletedpkg}"
 }
 
 # 创建临时目录
@@ -288,7 +285,6 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
                 n2ybuild_prefix=${trimmedline##*=}
                 n2ybuild_prefix=${n2ybuild_prefix#\'}
                 n2ybuild_prefix=${n2ybuild_prefix%\'}
-                echo "#${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
             elif [[ "${trimmedline}" = "defpre_build"* ]]; then
                 n2y_def_pre_build=true
                 echo "${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
@@ -297,7 +293,6 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
                 #总是遵循后定义的pre_build
                 n2y_def_pre_build=false
                 n2ypre_build=${trimmedline##*=}
-                echo "#${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
             elif [[ "${trimmedline}" = "defpost_build"* ]]; then
                 n2y_def_post_build=true
                 echo "${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
@@ -306,11 +301,12 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
                 #总是遵循后定义的post_build
                 n2y_def_post_build=false
                 n2ypost_build=${trimmedline##*=}
-                echo "#${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
             elif [[ "${trimmedline}" = "if__name__=="* ]]; then
-                echo "#${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
+                true
             elif [[ "${trimmedline}" = "single_main"* ]]; then
-                echo "#${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
+                true
+            elif [[ "${trimmedline}" = "#!"* ]] ; then
+                true
             else
                 echo "${line}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
             fi
@@ -377,9 +373,9 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
         cp "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml" lilac.yaml
         #提交
         git add lilac.yaml
-        git commit -m "Switch ${n2ycurrentpkg} to lilac.yaml"
         n2ycompletedpkg="${n2ycurrentpkg}"
         processnvchecker
+        git commit -m "Switch ${n2ycurrentpkg} to lilac.yaml"
     else
         echo "Changes ignored"
     fi
