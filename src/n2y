@@ -346,10 +346,10 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
     cat "${n2yuid}/${n2ycurrentpkg}/lilac.frompy.yaml" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
     cat "${n2yuid}/${n2ycurrentpkg}/lilac.update_on.yaml" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
     if [[ -f "${n2yuid}/${n2ycurrentpkg}/lilac.new.py" ]]; then
-        echo "These is your new lilac.py and generated lilac.yaml. "
+        echo "These are your new lilac.py and generated lilac.yaml. "
         bat --paging=never "${n2yuid}/${n2ycurrentpkg}/lilac.new.py"
     else
-        echo "These is your generated lilac.yaml. "
+        echo "This is your generated lilac.yaml. "
     fi
     bat --paging=never "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
     echo "If you want to make some changes, do it now in ${n2yuid}/${n2ycurrentpkg}/"
