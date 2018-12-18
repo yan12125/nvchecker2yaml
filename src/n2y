@@ -255,6 +255,9 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
         elif [[ ${testi} = "aur" && ${n2yinisection} = *"aur="* ]]; then
             echo "${n2yyamlupdateonprefix}${testi}: ${n2ycurrentpkg}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.update_on.yaml"
             n2yyamlupdateonprefix="    "
+        elif [[ ${testi} = "vcs" && ${n2yinisection} = *"vcs="* ]]; then
+            echo "${n2yyamlupdateonprefix}${testi}: ${n2ycurrentpkg}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.update_on.yaml"
+            n2yyamlupdateonprefix="    "
         fi
     done
 
