@@ -144,7 +144,6 @@ while true; do
     fi
 
     if [[ ${n2yghyn} = "y" ]]; then
-        read -p "Please input your Github account name (case-sensitive): " n2ymtngh
         break;
     elif [[ ${n2yghyn} = "n" ]]; then
         echo "Never mind"
@@ -154,6 +153,8 @@ while true; do
     fi
 
 done
+
+read -p "Please input your Github account name (case-sensitive): " n2ymtngh
 
 #获取规范化的部分ini，储存于${n2yuid}/part.ini
 let n2yinilineindex_s=${n2yinilineindex}+1
@@ -340,7 +341,8 @@ for n2ymaini in $(seq 0 ${n2ymaxmaini}); do
     if [[ ${n2yghyn} = y ]]; then
         echo "  - github: ${n2ymtngh}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
     else
-        echo "  - email: ${n2yinimtnname} <${n2yemail}>" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
+        echo "  - github: ${n2ymtngh}" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
+        echo "    email: ${n2yinimtnname} <${n2yemail}>" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
     fi
     echo >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
     cat "${n2yuid}/${n2ycurrentpkg}/lilac.frompy.yaml" >> "${n2yuid}/${n2ycurrentpkg}/lilac.new.yaml"
